@@ -1,0 +1,15 @@
+.home-container {
+    background-image: url('assets/background1.jpg');
+    padding: 50px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #ff5722; 
+  }
+  
+  p {
+    color: #3f51b5; 
+    font-size: 18px;
+  }

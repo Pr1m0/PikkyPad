@@ -1,0 +1,38 @@
+<!-- <h1 class="my-3">Belépés</h1>
+
+<form [formGroup]="loginForm" (submit)="login()">
+    <div class="input-group mb-3">
+        <span class="input-group-text">Felhasználónév</span>
+        <input type="text" formControlName="name"
+        class="form-control">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Jelszó</span>
+        <input type="text" formControlName="password"
+        class="form-control">
+    </div>
+
+    <button type="submit"
+    class="btn btn-primary">Belépés</button>
+</form> -->
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" style="width: 350px;">
+      <h2 class="text-center mb-3">Belépés</h2>
+  
+      <form [formGroup]="loginForm" (submit)="login()">
+        <div class="input-group mb-3">
+          <span class="input-group-text">Felhasználónév</span>
+          <input type="text" formControlName="name" class="form-control">
+        </div>
+  
+        <div class="input-group mb-3">
+          <span class="input-group-text">Jelszó</span>
+          <input type="password" formControlName="password" class="form-control">
+        </div>
+  
+        <button type="submit" class="btn btn-primary w-100">Belépés</button>
+      </form>
+    </div>
+  </div>
+  

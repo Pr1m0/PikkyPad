@@ -1,0 +1,37 @@
+<ul class="navbar">
+
+    @if(!loggedIn) {
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/login">Főoldal</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/login">Rólunk</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/login">Regisztráció</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/login">Bejelentkezés</a>
+      </li>
+    }
+
+    @if(loggedIn) {
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/logout">Főoldal</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/employee">Játékok</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/position">Profil</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/login">Rólunk</a>
+      </li>
+    }
+  </ul>
+
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
