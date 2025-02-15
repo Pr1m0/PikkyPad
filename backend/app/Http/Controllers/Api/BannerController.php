@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\User;
+
+class BannerController extends Controller
+{
+    public function getLoginCounter( $name ) {
+
+        $user = User::where( "name", $name )->first();
+        $counter = $user->login_counter;
+
+        return $counter;
+    }
+
+    public function setLoginCounter( $name ) {
+
+        $user = User::where( "name", $name )->first();
+        $user->increment( "login_counter" );
+    }
+
+    public function resetLoginCounter( $name ) {
+
+        $user = User::where( "name", $name )->first();
+        $user->login_counter = 0;
+
+        $user->update();
+    }
+
+    public function getBanningTime( $name ) {
+
+        $user = User::where( "name", $name )->first();
+
+        return $user->banning_time;
+    }
+
+    public function setBanningTime( $name ) {
+
+        $user = User::where( "name", $name )->first();
+        $user->banning_time = Carbon::now()->addminutes( 1 );
+
+        $user->update();
+    }
+
+    public function resetBanningTime( $name ) {
+
+        $user = User::where( "name", $name )->first();
+        $user->banning_time = null;
+
+        $user->update();
+    }
+}
