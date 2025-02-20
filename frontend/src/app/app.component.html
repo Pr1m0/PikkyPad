@@ -1,0 +1,42 @@
+<header>
+
+ <ul class="navbar">
+    <li class="navbar-item">
+      <a class="navbar-link" routerLink="/home">Főoldal</a>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" routerLink="/about">Rólunk</a>
+    </li>
+    @if(!loggedIn) {
+    <li class="navbar-item">
+      <a routerLink="register" routerLinkActive="active"
+      >Regisztráció</a>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" routerLink="/login" >Bejelentkezés</a>
+    </li>
+    
+    }
+    @if(loggedIn){
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/profile">Profil</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/logout">Kilépés</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" routerLink="/memorygame" >Memória Játék</a>
+      </li>
+    }
+  </ul>
+ 
+
+</header>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+
+<footer class="footer">
+  <p>&copy; 2025 Minden jog fenntartva.</p>
+</footer>

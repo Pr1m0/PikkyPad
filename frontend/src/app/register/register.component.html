@@ -1,0 +1,36 @@
+<form [formGroup]="registerForm" (ngSumbit)="register()">
+    <div class="input">
+        <label for="name" class="form-label">Név</label>
+        <input type="text" id="name"
+        class="form-control" 
+        formControlName="username"
+       required>
+    </div>
+    <div class="input">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="text" id="name"
+        class="form-control"
+        formControlName="email" required>
+    </div>
+    <div class="input">
+        <label for="name" class="form-label">Jelszó</label>
+        <input type="text" id="name"
+        class="form-control" 
+       formControlName="password" required>
+    </div>
+    <div class="input">
+        <label for="childname" class="form-label">Gyerek neve</label>
+        <input type="text" id="name"
+        class="form-control" 
+        formControlName="childname" required>
+    </div>
+    <div class="input">
+        <label for="chilldage" class="form-label">Gyerek Kora</label>
+        <input type="text" id="name"
+        class="form-control"
+        formControlName="chilldage"/>
+    </div>
+    <div>
+        <button class="btn btn-primary mt-2" Regisztrálok ></button>
+    </div>
+</form>
