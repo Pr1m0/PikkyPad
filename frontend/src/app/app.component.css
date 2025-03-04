@@ -21,15 +21,16 @@
   }
   
   .navbar a:hover {
-    text-decoration: underline;
+    text-decoration: lightblue;
   }
   
   
   .container {
-    background-image: url("/src/app/img/2.png");
+    background-image: url("img/2.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    width: full screen;
     
    
   } 

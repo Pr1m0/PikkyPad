@@ -6,15 +6,22 @@ import { LoginComponent } from './login/login.component';
 import { GameComponent } from './game/memorygame/memorygame.component';
 import { AboutComponent } from './about/about.component';
 import { authGuard } from './auth.guard';
+import { HomePrivateComponent } from './home-private/home-private.component';
+import{WelcomeComponent} from './welcome/welcome.component';
+import { GoalComponent } from './goal/goal.component';
 
 export const routes: Routes = [
 
-    {path: '', component:HomeComponent},
+    {path: '', component:WelcomeComponent},
     {path: 'register', component:RegisterComponent},
     {path: 'login', component:LoginComponent},
     {path: 'home', component:HomeComponent},
     {path:'memorygame', component:GameComponent, canActivate:[authGuard]},
-    {path: 'about', component:AboutComponent}
+    {path: 'about', component:AboutComponent},
+    {path :"home-private", component: HomePrivateComponent},
+    {path: "welcome", component:WelcomeComponent},
+    {path: "goal", component:GoalComponent},
+
 ];
 
 @NgModule({

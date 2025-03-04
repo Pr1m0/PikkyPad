@@ -1,10 +1,13 @@
-<form [formGroup]="registerForm" (ngSumbit)="register()">
-    <div class="input">
+<form [formGroup]="registerForm" class="d-flex justify-content-center align-items-center vh-100" (ngSubmit)="register()">
+    <div id="form" class="card p-4 shadow-lg" style="width: 350px; " 
+   >
+        <div>
         <label for="name" class="form-label">Név</label>
         <input type="text" id="name"
         class="form-control" 
-        formControlName="username"
+        formControlName="name"
        required>
+
     </div>
     <div class="input">
         <label for="email" class="form-label">E-mail</label>
@@ -28,9 +31,10 @@
         <label for="chilldage" class="form-label">Gyerek Kora</label>
         <input type="text" id="name"
         class="form-control"
-        formControlName="chilldage"/>
+        formControlName="childage"/>
     </div>
     <div>
-        <button class="btn btn-primary mt-2" Regisztrálok ></button>
+        <button class="btn btn-primary mt-2"  type="submit" (click)="register()" > Regisztrálok </button>
     </div>
+</div>
 </form>
