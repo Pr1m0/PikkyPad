@@ -9,7 +9,12 @@ import { Route, Router } from '@angular/router';
 })
 export class HomePrivateComponent {
 
+  img:string ='assets/img/letölés.jpg';
+
   constructor(private router:Router) { }
+  ngOnInit() {
+    console.log('Kép elérési út:', this.img);
+  }
   eredmeny(){
 
     this.router.navigate(['/goal']); 
