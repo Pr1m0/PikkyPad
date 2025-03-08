@@ -55,6 +55,7 @@
   .card-back {
     background-color: #f0f0f0;
     transform: rotateY(0deg);
+    background-image: url("../../../public/img/kerdojel.jpg");
   }
   
   .card.flipped img {

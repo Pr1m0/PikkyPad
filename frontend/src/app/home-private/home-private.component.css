@@ -9,7 +9,7 @@
     float: left;
     margin: 10px;
     transition: background-color 0.3s ease;
-    background-image: url("../../assets/img/letöltés.jpg");
+    background-image: url("../../public/img/letöltés.jpg");
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -23,7 +23,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../../assets/img/letöltés.jpg'); /* Cseréld le a saját képedre */
+    background-image: url('../../public/img/letöltés.jpg'); 
     background-size: cover;
     background-position: center;
     filter: blur(0px);
@@ -60,7 +60,7 @@ matemaikai CSS */
     float: left;
     margin: 10px;
     transition: background-color 0.3s ease;
-    background-image: url("../../assets/img/math.jpg");
+    background-image: url("../../public/img/math.jpg");
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -74,7 +74,7 @@ matemaikai CSS */
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../../assets/img/math.jpg'); /* Cseréld le a saját képedre */
+    background-image: url('../../public/img/math.jpg'); /* Cseréld le a saját képedre */
     background-size: cover;
     background-position: center;
     filter: blur(0px);

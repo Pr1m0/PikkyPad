@@ -21,10 +21,10 @@ export class GameComponent implements OnInit {
 
   initializeCards(): void {
     const imageUrls = [
-      '/img/lion.jpg',
-      '/img/elephant.png',
-      '/img/fox.jpg'
-    ];
+     "/img/fox.jpg",
+     "/img/elephant.jpg",
+    "/img/lion.jpg"
+    ]
 
     const duplicatedUrls = [...imageUrls, ...imageUrls];
 
@@ -43,13 +43,14 @@ export class GameComponent implements OnInit {
 
     if (this.flippedCards.length === 2) {
       this.checkForMatch();
+      console.log(this.cards)
     }
   }
 
   checkForMatch(): void {
     const [card1, card2] = this.flippedCards;
 
-    if (card1.url === card2.url) {
+    if (card1.url == card2.url) {
       this.cards[card1.index].matched = true;
       this.cards[card2.index].matched = true;
 
