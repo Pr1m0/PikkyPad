@@ -10,10 +10,10 @@ class Child extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'age', 'parent_id'];
+    protected $fillable = ['name', 'age', 'user_id'];
 
-    public function parent(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'parent_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

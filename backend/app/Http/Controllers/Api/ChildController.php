@@ -9,14 +9,15 @@ use App\Models\Child;
 class ChildController extends Controller
 {
    
-    public function index(Request $request)
-    {
+     public function index(Request $request)
+     {
         
         $user = $request->user();
-        $children = $user->children;  
-        return response()->json(['success' => true, 'data' => $children, 'message' => 'Gyermekek lekérdezve'], 200);
-    }
-
+         $children = $user->children;  
+         return response()->json(['success' => true, 'data' => $children, 'message' => 'Gyermekek lekérdezve'], 200);
+     }
+    
+    
     
     public function store(Request $request)
     {
@@ -29,7 +30,7 @@ class ChildController extends Controller
         $child = Child::create([
             'name' => $request->name,
             'age' => $request->age,
-            'parent_id' => $request->user()->id
+            'user_id' => $request->user()->id
         ]);
 
         return response()->json(['success' => true, 'data' => $child, 'message' => 'Gyermek létrehozva'], 201);
@@ -44,7 +45,7 @@ class ChildController extends Controller
 
         $child = Child::findOrFail($id);
 
-        if ($request->user()->id !== $child->parent_id) {
+        if ($request->user()->id !== $child->user_id) {
             return response()->json(['success' => false, 'message' => 'Hozzáférés megtagadva'], 403);
         }
 
@@ -59,7 +60,7 @@ class ChildController extends Controller
         $child = Child::findOrFail($id);
 
         
-        if ($request->user()->id !== $child->parent_id) {
+        if ($request->user()->id !== $child->user_id) {
             return response()->json(['success' => false, 'message' => 'Hozzáférés megtagadva'], 403);
         }
 
