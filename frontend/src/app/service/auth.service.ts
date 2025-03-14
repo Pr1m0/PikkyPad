@@ -20,7 +20,7 @@ export class AuthService {
     return this.http.post(url, data);
 
   }
-  logout(){
+  logOut(){
     const url = 'http://localhost:8000/api/logout';
     return this.http.post(url, null, this.makeHeader());
   }

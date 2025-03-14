@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #4d7dd5; 
+    background-color: #95762d; 
      padding: 15px;  
      text-align: center; 
   }
@@ -21,7 +21,7 @@
   }
   
   .navbar a:hover {
-    text-decoration: lightblue;
+    text-decoration: brown;
   }
   
   
