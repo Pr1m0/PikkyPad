@@ -9,6 +9,8 @@ import { authGuard } from './auth.guard';
 import { HomePrivateComponent } from './home-private/home-private.component';
 import{WelcomeComponent} from './welcome/welcome.component';
 import { GoalComponent } from './goal/goal.component';
+import { ChildSelectorComponent } from './child-selector/child-selector.component';
+import { MathComponent } from './game/math/math.component';
 
 export const routes: Routes = [
 
@@ -21,6 +23,8 @@ export const routes: Routes = [
     {path :"home-private", component: HomePrivateComponent},
     {path: "welcome", component:WelcomeComponent},
     {path: "goal", component:GoalComponent},
+    {path:"child-selector",component:ChildSelectorComponent},
+    {path:"math", component:MathComponent}
 
 ];
 

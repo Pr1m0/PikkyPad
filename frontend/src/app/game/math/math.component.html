@@ -1,0 +1,8 @@
+<div style="text-align:center">
+    <h1>{{ title }}</h1>
+    <h2>Pontok: {{ score }}</h2>
+    <h3>{{ currentProblem }}</h3>
+    <input type="number" [(ngModel)]="userAnswer" placeholder="Írd be a választ" />
+    <button (click)="checkAnswer()">Ellenőrzés</button>
+    <p>{{ message }}</p>
+  </div>
