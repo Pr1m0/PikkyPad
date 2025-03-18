@@ -1,5 +1,6 @@
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'PikkyPad';
   loggedIn = false;
+  tokenKey = 'aurhToken';
+  constructor(private http:HttpClient, private router:Router){}
 
   ngOnInit() {
 
@@ -18,6 +21,14 @@ export class AppComponent {
   }
 
   logOut(){
-    localStorage.removeItem('token');
+    const token =localStorage.getItem(this.tokenKey);
+    if(token) {
+      const headers =new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      this.http.post('/logout', {},{headers}).subscribe(()=>{
+        localStorage.removeItem(this.tokenKey);
+        this.router.navigate(['/welcome']);
+      })
+    }
   }
+
 }

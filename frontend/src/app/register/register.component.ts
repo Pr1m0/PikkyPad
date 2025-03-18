@@ -34,14 +34,13 @@ register(){
    if(this.registerForm.valid){
     this.http.post('http://localhost:8000/api/register', this.registerForm.value)
         .subscribe(responnse =>{
-          console.log("Sikeres regisztráció" , this.registerForm.value,
-            this.router.navigate(['/home-private']),
-            this.dataService.setData(this.registerForm.value)// Add to local storagedataService.setData(this.registerForm.value); // Add to local storage
+          console.log("Sikeres regisztráció" , this.registerForm.value);
+            this.router.navigate(['/home-private']);
+            this.dataService.setData(this.registerForm.value);// Add to local storagedataService.setData(this.registerForm.value); // Add to local storage
             
            
-          );
-         });
-   }
-}
-
-}
+          }
+         
+         );
+         
+   }}}

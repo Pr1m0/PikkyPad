@@ -4,7 +4,7 @@ import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-goal',
-  imports: [RegisterComponent],
+  imports: [],
   templateUrl: './goal.component.html',
   styleUrl: './goal.component.css'
 })
