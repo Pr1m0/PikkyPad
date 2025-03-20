@@ -21,7 +21,7 @@ class StatisticsControler extends Controller
     }
 
     public function save_statistics(Request $request)
-{
+    {
     $request->validate([
         'game_id' => 'required|exists:games,id',
         'child_id' => 'required|exists:children,id', 
@@ -36,9 +36,9 @@ class StatisticsControler extends Controller
         'data' => $statistic,
         'message' => 'Statisztikai adat mentve.'
     ], 201);
-}
-public function userStatistics(Request $request)
-{
+    }
+    public function userStatistics(Request $request)
+    {
     $user = Auth::user();
 
     if (!$user) {
@@ -48,13 +48,34 @@ public function userStatistics(Request $request)
         ], 401);
     }
 
-    
-    $statistics = Statistics::whereIn('child_id', $user->children()->pluck('id'))->get();
+    $statistics = Statistics::whereIn('child_id', $user->children()->pluck('id'))->with('game')->get();
 
     return response()->json([
         'success' => true,
         'data' => $statistics,
         'message' => 'Felhasználó gyermekeinek statisztikái sikeresen lekérdezve.'
     ], 200);
-}
+    }
+    public function parentStatistics(Request $request)
+    {
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Nincs bejelentkezett felhasználó.'
+        ], 401);
+    }
+
+    $statistics = Statistics::whereIn('child_id', $user->children()->pluck('id'))
+        ->selectRaw('child_id, COUNT(*) as games_played, SUM(score) as total_score')
+        ->groupBy('child_id')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $statistics,
+        'message' => 'Szülői statisztikák sikeresen lekérdezve.'
+    ], 200);
+    }
 }

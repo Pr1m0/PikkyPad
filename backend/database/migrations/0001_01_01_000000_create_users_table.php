@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['user', 'admin'])->default('user'); // gyerekek kezeléséhez szükséges
+            $table->enum('role', ['user', 'admin', 'superadmin'])->default('user'); // gyerekek kezeléséhez szükséges
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,4 +13,10 @@ class Game extends Model
         'description',
         'category'
     ];
+
+    public function children()
+    {
+    return $this->belongsToMany(Child::class, 'child_game');
+    }
+
 }

@@ -16,4 +16,8 @@ class Child extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function games()
+    {
+    return $this->belongsToMany(Game::class, 'child_game');
+    }
 }

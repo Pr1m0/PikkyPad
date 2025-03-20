@@ -53,4 +53,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin' || $this->role === 'superadmin';
+    }
+
+    // Ellenőrzés, hogy a felhasználó superadmin-e
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === 'superadmin';
+    }
+
 }
