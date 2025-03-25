@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { AppComponent } from '../app.component';
@@ -9,51 +9,46 @@ import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,HttpClientModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginForm !:any;
 
-  // constructor(
-  //   private authService:AuthService,
-  //   private builder:FormBuilder,
-  //   private app:AppComponent){}
-  // ngOnInit() {
-
-  //   this.authService.login("","").subscribe({
-  //     next :(body: any) => {
-  //       console.log(body.data.token);
-  //       localStorage.setItem('token', body.data.token);
-   
-  //     },
-  //     error:(err) => {
-  //       console.log(err);
-  //     }
-  //   })
+  constructor(
+    private http: HttpClient,
+     private router: Router, 
+     private auth:AuthService,
+    private builder : FormBuilder,
+    private app : AppComponent) {}
+     
   // }
-  // login(){
+  ngOnInit(){
+    this.loginForm = this.builder.group({
+      name:[""],
+      password:[""]
+    })
+  }
+
   
-    
-  // }
-  user = {
-    name: '',
-    password: ''
-  };
-
-  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
-    this.http.post('http://localhost:8000/api/login', this.user)
-      .subscribe((response: any) => {
-        localStorage.setItem('token', response.token);
+    console.log(this.loginForm.value)
+    this.auth.login( this.loginForm.value)
+      .subscribe({
+        next:(body:any) => {
+        localStorage.setItem('token', body.data.token);
         this.router.navigate(['/home-private']); // Átirányítás a védett oldalra
-      // }, error => {
-      //   console.log(error);
+          this.app.loggedIn = true;
+       },
+        error:(err) => {
+          console.log(err)
+        }
        }
-      );
+       );
   }
-}
 
+}
 
 

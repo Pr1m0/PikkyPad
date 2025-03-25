@@ -13,7 +13,7 @@ export class HomePrivateComponent {
 
   constructor(private router:Router) { }
   ngOnInit() {
-    console.log('Kép elérési út:', this.img);
+    
   }
   eredmeny(){
 

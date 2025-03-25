@@ -1,11 +1,11 @@
 <div>
-    <h2>Válassz fiókot</h2>
-    <select (change)="onAccountSelect($any($event.target).value)">
+    <!-- <h2>Válassz fiókot</h2>
+    <-<select (change)="onAccountSelect($any($event.target).value)"> 
       <option value="" disabled selected>Válassz egy fiókot...</option>
       <option *ngFor="let account of accounts" [value]="account.id">
         {{ account.name }}
       </option>
-    </select>
+    </select> -->
   </div>
   
   <div *ngIf="selectedAccount">
@@ -17,5 +17,5 @@
     <h2>Új fiók hozzáadása</h2>
     <input [(ngModel)]="newAccountName" placeholder="Új gyermek neve" >
     <input [(ngModel)]="newAccountAge" placeholder="Új gyermek kora">
-    <button (click)="addAccount()">Hozzáadás</button>
+    <button (click)="addChild()">Hozzáadás</button>
   </div>

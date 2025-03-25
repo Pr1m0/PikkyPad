@@ -8,32 +8,32 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   
    
-    
+   
   constructor(private http: HttpClient) { }
 
 
-  login(username: string,password: string) {
-    return this.http.post('http://localhost:8000/api/login', {"username":username,"passord": password});
+  login(userData: any) {
+    return this.http.post('http://localhost:8000/api/login', userData);
   }
   register(data: any) {
-    const url = 'http://localhost:8000/api/register';
-    return this.http.post(url, data);
+   
+    return this.http.post('http://localhost:8000/api/register', data);
 
   }
-  logOut(){
+  logout(){
     const url = 'http://localhost:8000/api/logout';
     return this.http.post(url, null, this.makeHeader());
-  }
+  } 
 
   makeHeader() {
     return{
     headers :{
-      'Authorization' : 'Bearer ' + localStorage.getItem('token')
+      'Authorization' : 'Bearer ' + localStorage.removeItem('token')
     }
     }
   }
   isLoggedIn() {
-    return!!localStorage.getItem('token');
+    return !!localStorage.getItem('token');
   }
   }
 

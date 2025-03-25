@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../service/data.service';
+import { AuthService } from '../service/auth.service';
 
 
 
@@ -15,8 +16,11 @@ import { DataService } from '../service/data.service';
 })
 
 export class RegisterComponent {  
-registerForm:FormGroup;
-constructor(private builder: FormBuilder, private http:HttpClient, private router : Router,private dataService:DataService ) {
+registerForm!:any;
+constructor(private builder: FormBuilder,
+  private router : Router,
+   
+  private auth: AuthService ) {
 
   this.registerForm = this.builder.group(
      {
@@ -31,15 +35,17 @@ constructor(private builder: FormBuilder, private http:HttpClient, private route
 }
  
 register(){
+  console.log("Müködik")
    if(this.registerForm.valid){
-    this.http.post('http://localhost:8000/api/register', this.registerForm.value)
-        .subscribe(responnse =>{
-          console.log("Sikeres regisztráció" , this.registerForm.value);
-            this.router.navigate(['/home-private']);
-            this.dataService.setData(this.registerForm.value);// Add to local storagedataService.setData(this.registerForm.value); // Add to local storage
-            
-           
-          }
+    this.auth.register( this.registerForm.value)
+    .subscribe((res)=>{
+          console.log("Sikeres regisztráció" ,res);
+        
+          this.registerForm.reset();  // Form ürítése
+          this.router.navigate(['/login']);  // Átirányítás
+        },
+        
+          
          
          );
          

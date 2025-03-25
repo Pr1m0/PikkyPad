@@ -11,6 +11,7 @@ import{WelcomeComponent} from './welcome/welcome.component';
 import { GoalComponent } from './goal/goal.component';
 import { ChildSelectorComponent } from './child-selector/child-selector.component';
 import { MathComponent } from './game/math/math.component';
+import { LogoutComponent } from './logout/logout.component';
 
 export const routes: Routes = [
 
@@ -24,7 +25,8 @@ export const routes: Routes = [
     {path: "welcome", component:WelcomeComponent},
     {path: "goal", component:GoalComponent},
     {path:"child-selector",component:ChildSelectorComponent},
-    {path:"math", component:MathComponent}
+    {path:"math", component:MathComponent},
+    {path:"logout",component:LogoutComponent}
 
 ];
 

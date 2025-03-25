@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { ChildrenOutletContexts } from '@angular/router';
+import { ChildService } from '../service/child.service';
 
 @Component({
   selector: 'app-child-selector',
@@ -9,35 +11,63 @@ import { FormsModule } from '@angular/forms';
 })
 export class ChildSelectorComponent {
 
-  accounts = [
-    {
-      id:1, name:'Szülői fiók'
-    }
-  ];
-
+  childForm!:FormGroup
+  constructor(
+    private children : ChildService,
+  private builder : FormBuilder){
+    
+  }
+  addMode = true;
+  ngOnInit(){
+    this.childForm=this.builder.group({
+    id:[''],
+    name:[''],
+    age:['']
+  })}
+ 
   selectedAccount:any =null;
   newAccountName:string='';
   newAccountAge:number = 0;
 
   //Fiók kiválasztása
 
-  onAccountSelect(accountsId:number){
-    this.selectedAccount = this.accounts.find(acc => acc.id === accountsId);
-    console.log('Kiválasztott fiók: ', this.selectedAccount)
-  }
+  getChild(){
+   this.children.getChild().subscribe({
+    next:(res:any)=> {
+      console.log(res);
 
-  //Új fiók felvétele
-  addAccount() {
-    if(this.newAccountName.trim()){
-      const newAccount = {
-        id: this.accounts.length + 1,  
-        name: this.newAccountName,
-        age: this.newAccountAge
-      };
-      this.accounts.push(newAccount);
-      this.newAccountName="";
-      console.log('Új fiók hozzáadva:', newAccount)
     }
+   })
+   
   }
 
-}
+  addChild(){
+    this.children.addChild(this.childForm.value).subscribe({
+      next:(res:any) => {
+        console.log(res);
+        this.childForm.reset();
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    })
+  }
+
+  deleteChild(id:number){
+    console.log(id);
+    this.children.deleteChild(id).subscribe({
+      next:(res:any) => {
+        console.log(res);
+        this.getChild
+      }
+    })
+  }
+
+  editChild(data:any){
+      console.log(data);
+      this.addMode = false;
+  }
+  
+  }
+
+

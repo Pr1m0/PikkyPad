@@ -1,6 +1,8 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AuthService } from './service/auth.service';
+
 
 
 @Component({
@@ -12,23 +14,17 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 export class AppComponent {
   title = 'PikkyPad';
   loggedIn = false;
-  tokenKey = 'aurhToken';
-  constructor(private http:HttpClient, private router:Router){}
+  tokenKey = 'authToken';
+  constructor(private http:HttpClient, private router:Router,private auth:AuthService){}
 
   ngOnInit() {
 
-    this.loggedIn = !!localStorage.getItem('token')
+   
+    this.loggedIn = !!localStorage.getItem('token');
   }
 
-  logOut(){
-    const token =localStorage.getItem(this.tokenKey);
-    if(token) {
-      const headers =new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      this.http.post('/logout', {},{headers}).subscribe(()=>{
-        localStorage.removeItem(this.tokenKey);
-        this.router.navigate(['/welcome']);
-      })
-    }
-  }
+ 
+ 
+ }
 
-}
+
