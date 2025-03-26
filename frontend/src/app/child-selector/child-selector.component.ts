@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChildrenOutletContexts } from '@angular/router';
 import { ChildService } from '../service/child.service';
 
 @Component({
   selector: 'app-child-selector',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './child-selector.component.html',
   styleUrl: './child-selector.component.css'
 })
@@ -20,21 +20,21 @@ export class ChildSelectorComponent {
   addMode = true;
   ngOnInit(){
     this.childForm=this.builder.group({
-    id:[''],
-    name:[''],
-    age:['']
+      userId:[""],
+    childname:[""],
+    age:[""]
   })}
  
   selectedAccount:any =null;
-  newAccountName:string='';
-  newAccountAge:number = 0;
+  
 
   //Fiók kiválasztása
 
-  getChild(){
+  getChildes(){
    this.children.getChild().subscribe({
     next:(res:any)=> {
       console.log(res);
+      this.childForm= res.data;
 
     }
    })
@@ -42,10 +42,10 @@ export class ChildSelectorComponent {
   }
 
   addChild(){
-    this.children.addChild(this.childForm.value).subscribe({
+    this.children.addChildren(this.childForm.value).subscribe({
       next:(res:any) => {
         console.log(res);
-        this.childForm.reset();
+        this.getChildes();
       },
       error:(err)=>{
         console.log(err)
@@ -53,12 +53,12 @@ export class ChildSelectorComponent {
     })
   }
 
-  deleteChild(id:number){
+  deleteChildes(id:number){
     console.log(id);
     this.children.deleteChild(id).subscribe({
       next:(res:any) => {
         console.log(res);
-        this.getChild
+        this.getChildes
       }
     })
   }

@@ -8,14 +8,15 @@
     </select> -->
   </div>
   
-  <div *ngIf="selectedAccount">
+  <div >
     <h3>Kiválasztott fiók:</h3>
-    <p>{{ selectedAccount.name }}</p>
+   
   </div>
-  
+  <form [formGroup]="childForm" (ngSubmit)="addChild()">
   <div>
     <h2>Új fiók hozzáadása</h2>
-    <input [(ngModel)]="newAccountName" placeholder="Új gyermek neve" >
-    <input [(ngModel)]="newAccountAge" placeholder="Új gyermek kora">
+    <input type="name"  formControlName="childname" placeholder="Új gyermek neve" class="form-control" >
+    <input type="age" placeholder="Új gyermek kora" class="form-control">
     <button (click)="addChild()">Hozzáadás</button>
   </div>
+</form>

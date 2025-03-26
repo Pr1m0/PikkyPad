@@ -17,9 +17,10 @@ export class ChildService {
     let url ='http://localhost:8000/api/children';
     return this.http.get(url);
   }
-  addChild(data:any){
+  addChildren(data:any){
+   
     let url = 'http://localhost:8000/api/children';
-    return this.http.post(url,data, this.auth.makeHeader());
+    return this.http.post(url,data, );
   }
   updateChild(data:any){
     let url = 'http://localhost:8000/api/children';
