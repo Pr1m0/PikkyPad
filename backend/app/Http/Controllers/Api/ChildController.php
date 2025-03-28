@@ -28,9 +28,7 @@ class ChildController extends Controller
         ], 200);
     }
 
-    /**
-     * 🔹 Új gyermek hozzáadása a bejelentkezett felhasználóhoz.
-     */
+    
     public function add_child(Request $request)
     {
         $request->validate([
@@ -53,9 +51,7 @@ class ChildController extends Controller
         ], 201);
     }
 
-    /**
-     * 🔹 Gyermek adatainak módosítása
-     */
+    
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -80,9 +76,7 @@ class ChildController extends Controller
         ], 200);
     }
 
-    /**
-     * 🔹 Gyermek törlése
-     */
+    
     public function destroy(Request $request, $id)
     {
         $user = auth()->user();
