@@ -45,6 +45,6 @@ class LoginRequest extends FormRequest
             "success" => false,
             "error" => $validator->errors(),
             "message" => "Adatbeviteli hiba"
-        ]));
+        ],422));
     }
 }

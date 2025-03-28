@@ -58,6 +58,7 @@ class GameController extends Controller
         return response()->json([
             'success' => true,
             'data' => $game,
+            
             'message' => 'Játék frissítve.'
         ], 200);
     }

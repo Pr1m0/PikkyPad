@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/children', [ChildController::class, 'add_child']);
     Route::put('/children/{id}', [ChildController::class, 'update']);
     Route::delete('/children/{id}', [ChildController::class, 'destroy']);
+    Route::post('/children/{id}/games', [ChildController::class, 'assignGame']);
+    Route::get('/children/{id}/games', [ChildController::class, 'getGamesForChild']);
 
     Route::get('/games', [GameController::class, 'game_query']);
     Route::post('/games', [GameController::class, 'add_game']);

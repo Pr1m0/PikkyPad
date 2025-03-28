@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
 
         return [
 
-            "name" => "required|min:3|max:10|regex:/^[\pL\s]+$/u|unique:users,name",
+            "name" => "required|min:3|max:20|regex:/^[\pL\s]+$/u|unique:users,name",
             "email" => "required|email|unique:users,email",
             "password" => [ "required",
                             "min:8",
@@ -40,7 +40,7 @@ class RegisterRequest extends FormRequest
     public function messages() {
 
         return [
-            "name.required" => "Név elvárt.",
+            "name.required" => "Név megadása Kötelező.",
             "name.min" => "Túl kevés karakter.",
             "name.max" => "Túl hosszú név.",
             "name.alpha" => "Csak betűk lehetnek, ékezettel vagy anélkül.",

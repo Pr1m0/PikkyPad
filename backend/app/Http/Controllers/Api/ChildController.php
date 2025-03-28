@@ -34,8 +34,8 @@ class ChildController extends Controller
     public function add_child(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'age' => 'required|integer|min:0'
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:3|max:9'
         ]);
 
         $user = auth()->user();
@@ -60,7 +60,7 @@ class ChildController extends Controller
     {
         $request->validate([
             'name' => 'sometimes|required|string',
-            'age' => 'sometimes|required|integer|min:0'
+            'age' => 'sometimes|required|integer|min:3|max:9'
         ]);
 
         $user = auth()->user();
@@ -100,4 +100,27 @@ class ChildController extends Controller
             'message' => 'Gyermek törölve.'
         ], 200);
     }
+    public function assignGame(Request $request, $childId)
+    {
+    $request->validate([
+        'game_id' => 'required|exists:games,id'
+    ]);
+
+    $child = Child::findOrFail($childId);
+    $child->games()->attach($request->game_id);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Játék sikeresen hozzárendelve a gyermekhez.'
+    ], 200);
+    }
+    public function getGamesForChild($id)
+{
+    $child = Child::with('games')->findOrFail($id);
+
+    return response()->json([
+        'success' => true,
+        'data' => $child->games
+    ]);
+}
 }
