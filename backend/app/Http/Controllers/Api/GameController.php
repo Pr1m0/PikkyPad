@@ -81,4 +81,5 @@ class GameController extends Controller
             'message' => 'Játék törölve.'
         ], 200);
     }
+    
 }

@@ -18,7 +18,7 @@ class ChildController extends Controller
             $children = Child::with('user:id,name')->get();
         } else {
             // Szülő csak a saját gyerekeit láthatja
-            $children = $user->children()->with('user:id,name')->get();
+            $children = auth()->user()->children()->with('games')->get();
         }
 
         return response()->json([
@@ -109,12 +109,19 @@ class ChildController extends Controller
     ], 200);
     }
     public function getGamesForChild($id)
-{
+    {
     $child = Child::with('games')->findOrFail($id);
 
     return response()->json([
         'success' => true,
         'data' => $child->games
     ]);
+    }
+    public function removeGame($childId, $gameId)
+{
+    $child = auth()->user()->children()->findOrFail($childId);
+    $child->games()->detach($gameId);
+
+    return response()->json(['success' => true, 'message' => 'Játék eltávolítva.']);
 }
 }

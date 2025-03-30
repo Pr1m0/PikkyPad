@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/children/{id}', [ChildController::class, 'destroy']);
     Route::post('/children/{id}/games', [ChildController::class, 'assignGame']);
     Route::get('/children/{id}/games', [ChildController::class, 'getGamesForChild']);
+    Route::delete('/children/{childId}/games/{gameId}', [ChildController::class, 'removeGame']);
 
     Route::get('/games', [GameController::class, 'game_query']);
     Route::post('/games', [GameController::class, 'add_game']);
