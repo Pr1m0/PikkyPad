@@ -24,16 +24,17 @@ class RegisterRequest extends FormRequest
     public function rules(): array {
 
         return [
-
-            "name" => "required|min:3|max:20|regex:/^[\pL\s]+$/u|unique:users,name",
-            "email" => "required|email|unique:users,email",
-            "password" => [ "required",
-                            "min:8",
-                            "regex:/[a-z]/",
-                            "regex:/[A-Z]/",
-                            "regex:/[0-9]/" ,
-                            "regex:/[@$!%*?&]/"],
-            // "confirm_password" => "same:password"
+            'name' => 'required|min:3|max:20|regex:/^[\pL\s]+$/u|unique:users,name',
+            'email' => 'required|email:rfc,dns|unique:users,email',
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/[a-z]/',    
+                'regex:/[A-Z]/',    
+                'regex:/[0-9]/',    
+                'regex:/[@$!%*?&]/' 
+            ],
+            'confirm_password' => 'same:password|required'
         ];
     }
 
@@ -51,7 +52,8 @@ class RegisterRequest extends FormRequest
             "password.required" => "Jelszó elvárt.",
             "password.min" => "Túl rövid jelszó.",
             "password.regex" => "Tartalmaznia kell legalább egy kisbetüt, nagybetűt, számot és speciális karaktert.",
-            // "confirm_password.same" => "Nem egyező jelszó."
+            "confirm_password.required" => "Kérlek ismételd meg a jelszót.",
+            "confirm_password.same" => "A jelszavak nem egyeznek"
         ];
     }
 
@@ -61,6 +63,6 @@ class RegisterRequest extends FormRequest
             "success" => false,
             "error" => $validator->errors(),
             "message" => "Adatbeviteli hiba"
-        ]));
+        ],422));
     }
 }

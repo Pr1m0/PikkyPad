@@ -8,6 +8,7 @@ use App\Models\Child;
 
 class ChildController extends Controller
 {
+    
    
     public function child_query(Request $request)
     {
@@ -18,7 +19,7 @@ class ChildController extends Controller
             $children = Child::with('user:id,name')->get();
         } else {
             // Szülő csak a saját gyerekeit láthatja
-            $children = auth()->user()->children()->with('games')->get();
+            $children = $user->children()->with('user:id,name', 'games')->get();
         }
 
         return response()->json([
@@ -118,10 +119,10 @@ class ChildController extends Controller
     ]);
     }
     public function removeGame($childId, $gameId)
-{
+    {
     $child = auth()->user()->children()->findOrFail($childId);
     $child->games()->detach($gameId);
 
     return response()->json(['success' => true, 'message' => 'Játék eltávolítva.']);
-}
+    }
 }
