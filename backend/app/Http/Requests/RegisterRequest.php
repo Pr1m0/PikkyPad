@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array {
 
         return [
-            'name' => 'required|min:3|max:20|regex:/^[\pL\s]+$/u|unique:users,name',
+            'name' => 'required|min:3|max:20|regex:/^[\pL\s]+$/u',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'password' => [
                 'required',
@@ -41,19 +41,18 @@ class RegisterRequest extends FormRequest
     public function messages() {
 
         return [
-            "name.required" => "Név megadása Kötelező.",
-            "name.min" => "Túl kevés karakter.",
-            "name.max" => "Túl hosszú név.",
-            "name.alpha" => "Csak betűk lehetnek, ékezettel vagy anélkül.",
-            "name.unique" => "Hibás felhasználónév",
-            "email.required" => "Email elvárt.",
-            "email.email" => "Érvénytelen email.",
-            "email.unique" => "Hibás email.",
-            "password.required" => "Jelszó elvárt.",
-            "password.min" => "Túl rövid jelszó.",
-            "password.regex" => "Tartalmaznia kell legalább egy kisbetüt, nagybetűt, számot és speciális karaktert.",
-            "confirm_password.required" => "Kérlek ismételd meg a jelszót.",
-            "confirm_password.same" => "A jelszavak nem egyeznek"
+            "name.required" => "Név megadása kötelező.",
+            "name.min" => "A név túl rövid.",
+            "name.max" => "A név túl hosszú.",
+            "name.alpha" => "A név csak betűket tartalmazhat, ékezettel vagy anélkül.",
+            "email.required" => "Az email cím megadása kötelező.",
+            "email.email" => "Kérjük, érvényes email címet adjon meg.",
+            "email.unique" => "Ez az email cím már használatban van.",
+            "password.required" => "A jelszó megadása kötelező",
+            "password.min" => "A jelszó túl rövid.",
+            "password.regex" => "A jelszónak tartalmaznia kell legalább egy kisbetűt, egy nagybetűt, egy számot és egy speciális karaktert.",
+            "confirm_password.required" => "A jelszó megerősítése kötelező.",
+            "confirm_password.same" => "A megadott jelszavak nem egyeznek."
         ];
     }
 

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Api\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -42,4 +42,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/statistics', [StatisticsControler::class, 'userStatistics']);
     Route::get('/parent/statistics', [StatisticsControler::class, 'parentStatistics']);
 });
-
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
