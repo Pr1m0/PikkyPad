@@ -14,11 +14,9 @@ class ChildController extends Controller
     {
         $user = auth()->user();
 
-        // Admin minden gyereket lát
         if ($user->role === 'admin') {
             $children = Child::with('user:id,name')->get();
         } else {
-            // Szülő csak a saját gyerekeit láthatja
             $children = $user->children()->with('user:id,name', 'games')->get();
         }
 
@@ -63,7 +61,6 @@ class ChildController extends Controller
         $user = auth()->user();
         $child = Child::findOrFail($id);
 
-        // Csak a saját gyerekét módosíthatja a szülő, admin mindenkit
         if ($user->id !== $child->user_id && $user->role !== 'admin') {
             return response()->json(['success' => false, 'message' => 'Hozzáférés megtagadva'], 403);
         }
