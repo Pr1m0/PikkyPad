@@ -9,48 +9,44 @@ use App\Models\User;
 
 class BannerController extends Controller
 {
-    public function getLoginCounter( $name ) {
-
-        $user = User::where( "name", $name )->first();
-        $counter = $user->login_counter;
-
-        return $counter;
+    public function getLoginCounter($email) {
+        $user = User::where("email", $email)->first();
+        return $user?->login_counter ?? 0;
     }
-
-    public function setLoginCounter( $name ) {
-
-        $user = User::where( "name", $name )->first();
-        $user->increment( "login_counter" );
+    
+    public function setLoginCounter($email) {
+        $user = User::where("email", $email)->first();
+        if ($user) {
+            $user->increment("login_counter");
+        }
     }
-
-    public function resetLoginCounter( $name ) {
-
-        $user = User::where( "name", $name )->first();
-        $user->login_counter = 0;
-
-        $user->update();
+    
+    public function resetLoginCounter($email) {
+        $user = User::where("email", $email)->first();
+        if ($user) {
+            $user->login_counter = 0;
+            $user->save();
+        }
     }
-
-    public function getBanningTime( $name ) {
-
-        $user = User::where( "name", $name )->first();
-
-        return $user->banning_time;
+    
+    public function getBanningTime($email) {
+        $user = User::where("email", $email)->first();
+        return $user?->banning_time;
     }
-
-    public function setBanningTime( $name ) {
-
-        $user = User::where( "name", $name )->first();
-        $user->banning_time = Carbon::now()->addminutes( 1 );
-
-        $user->update();
+    
+    public function setBanningTime($email) {
+        $user = User::where("email", $email)->first();
+        if ($user) {
+            $user->banning_time = Carbon::now()->addMinutes(1);
+            $user->save();
+        }
     }
-
-    public function resetBanningTime( $name ) {
-
-        $user = User::where( "name", $name )->first();
-        $user->banning_time = null;
-
-        $user->update();
+    
+    public function resetBanningTime($email) {
+        $user = User::where("email", $email)->first();
+        if ($user) {
+            $user->banning_time = null;
+            $user->save();
+        }
     }
 }

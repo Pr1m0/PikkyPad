@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use App\Http\Controllers\Api\MailController;
 
 
 class AuthController extends ResponseController {
@@ -24,29 +25,51 @@ class AuthController extends ResponseController {
             "password" => bcrypt( $request[ "password" ])
         ]);
 
+
         return $this->sendResponse( $user, "Sikeres regisztráció" );
     }
 
     public function login(LoginRequest $request) {
         $request->validated();
     
-        if (Auth::attempt([ "email" => $request["email"], "password" => $request["password"] ])) {
-    
+        if (Auth::attempt(["email" => $request["email"], "password" => $request["password"]])) {
             $user = Auth::user();
-            $token = $user->createToken($user->name . "Token")->plainTextToken;
     
-            $data = [
-                "name" => $user->name,
-                "token" => $token
-            ];
+            $banningTime = (new BannerController)->getBanningTime($user->email);
     
-            return $this->sendResponse($data, "Sikeres bejelentkezés");
+            if ($banningTime != null && Carbon::now() < $banningTime) {
+                $errorMessage = [
+                    "Következő lehetőség:",
+                    $banningTime
+                ];
+                return $this->sendError("Azonosítási hiba", $errorMessage, 405);
+            } else {
+                (new BannerController)->resetLoginCounter($user->email);
+                (new BannerController)->resetBanningTime($user->email);
+    
+                $token = $user->createToken($user->name . "Token")->plainTextToken;
+    
+                $data = [
+                    "name" => $user->name,
+                    "token" => $token
+                ];
+    
+                return $this->sendResponse($data, "Sikeres bejelentkezés");
+            }
+        } else {
+            (new BannerController)->setLoginCounter($request["email"]);
+            $counter = (new BannerController)->getLoginCounter($request["email"]);
+    
+            if ($counter > 3) {
+                (new BannerController)->setBanningTime($request["email"]);
+                // $time = Carbon::now();
+                // ( new MailController )->sendMail( $request[ "email" ], $time );
+                return $this->sendError("Azonosítási hiba", "Hibás email vagy jelszó (le lett tiltva egy időre)", 401);
+            }
+    
+            return $this->sendError("Azonosítási hiba", "Hibás email vagy jelszó", 401);
         }
-    
-        return $this->sendError("Azonosítási hiba", "Hibás email vagy jelszó", 401);
     }
-    
-
     public function logout() {
 
         $user = auth( "sanctum" )->user();
