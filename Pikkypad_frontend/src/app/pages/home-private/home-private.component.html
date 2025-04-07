@@ -1,0 +1,24 @@
+ 
+   <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/home-private']">PikkyPad</a>
+      <div>
+        <a class="btn btn-outline-primary me-2" routerLink="/home-private">Főoldal</a>
+        <a class="btn btn-outline-primary me-2" routerLink="/child-dashboard">Gyermekek</a>
+        <button class="btn btn-outline-danger" (click)="logout()">
+          Kijelentkezés
+        </button>
+      </div>
+    </div>
+  </nav>
+   <div class="container text-center mt-5">
+    <h1>Üdvözlünk a PikkyPad szülői felületén!</h1>
+    
+    <p class="lead">Innen kezelheted a gyermekeidet és a hozzájuk tartozó játékokat.</p>
+  
+    <a routerLink="/child-dashboard" class="btn btn-primary mt-3">Gyermekek megtekintése</a>
+    
+  </div> 
+
+  
+  
