@@ -32,7 +32,7 @@ class ChildController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:3|max:9'
+            'age' => 'required|integer|min:3|max:5'
         ]);
 
         $user = auth()->user();
