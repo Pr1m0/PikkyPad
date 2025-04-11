@@ -1,1 +1,0 @@
-"MemoryTitle mappa tartalma" 
