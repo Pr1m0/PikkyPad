@@ -1,4 +1,4 @@
-# Pikkypad
+# PikkyPad
 
 Oktató és szórakoztató célú fejlesztőjáték óvodáskorú gyerekeknek
 
