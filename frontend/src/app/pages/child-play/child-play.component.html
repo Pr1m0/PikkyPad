@@ -1,0 +1,39 @@
+<div class="play-screen">
+
+    <div class="play-header">
+      <div>
+        <strong>{{ currentGame?.title }}</strong><br />
+        <small>{{ currentGame?.description }}</small>
+      </div>
+      <div class="text-end">
+        ⏳ {{ formatTime() }}<br />
+        <button class="btn btn-sm btn-light mt-2" (click)="goBack()"></button>
+      </div>
+    </div>
+  
+    <div class="play-body">
+      <ng-container *ngIf="isMemoryGame()">
+        <app-memory-game></app-memory-game>
+      </ng-container>
+      <ng-container *ngIf="isColoringGame()">
+        <app-coloring-game></app-coloring-game>
+      </ng-container>
+      <ng-container *ngIf="isPuzzleGame()">
+        <app-puzzle></app-puzzle>
+      </ng-container>
+      <ng-container *ngIf="!currentGame">
+        <p class="text-muted">Nincs betöltött játék.</p>
+      </ng-container>
+    </div>
+  
+    <div class="play-controls">
+      <button class="btn btn-outline-primary" (click)="previousGame()" [disabled]="currentGameIndex === 0">
+        ◀ Előző
+      </button>
+      <button class="btn btn-outline-primary" (click)="nextGame()" [disabled]="currentGameIndex >= games.length - 1">
+        Következő ▶
+      </button>
+    </div>
+  
+  </div>
+  
