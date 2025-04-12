@@ -3,28 +3,25 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
 
 class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public string $name;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $name)
+    public function __construct(string $name)
     {
-        //
-    }
-    public function build()
-    {
-    return $this->subject('Üdvözlünk a PikkyPad-en!')
-                ->view('emails.welcome')
-                ->with(['name' => $this->name]);
+        $this->name = $name;
     }
 
     /**
@@ -33,7 +30,7 @@ class WelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome Mail',
+            subject: 'Üdvözlünk a PikkyPad-en!',
         );
     }
 
@@ -43,14 +40,14 @@ class WelcomeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'welcome',
+            with: ['name' => $this->name],
+            
         );
     }
 
     /**
      * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

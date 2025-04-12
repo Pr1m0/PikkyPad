@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
-use App\Http\Controllers\Api\MailController;
+use App\Http\Controllers\MailController;
 
 
 class AuthController extends ResponseController {
@@ -23,7 +23,15 @@ class AuthController extends ResponseController {
             "name" => $request[ "name" ],
             "email" => $request[ "email" ],
             "password" => bcrypt( $request[ "password" ])
+
         ]);
+
+        try {
+            app(\App\Http\Controllers\MailController::class)
+                ->sendWelcomeMail($user->email, $user->name);
+        } catch (\Throwable $e) {
+            \Log::error('Sikertelen welcome email küldés: ' . $e->getMessage());
+        }
 
 
         return $this->sendResponse( $user, "Sikeres regisztráció" );
@@ -62,8 +70,8 @@ class AuthController extends ResponseController {
     
             if ($counter > 3) {
                 (new BannerController)->setBanningTime($request["email"]);
-                // $time = Carbon::now();
-                // ( new MailController )->sendMail( $request[ "email" ], $time );
+                $time = Carbon::now();
+                ( new MailController )->sendMail( $request[ "email" ], $time );
                 return $this->sendError("Azonosítási hiba", "Hibás email vagy jelszó (le lett tiltva egy időre)", 401);
             }
     

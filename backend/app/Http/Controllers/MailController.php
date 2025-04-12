@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\Mail\AllertMail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
@@ -17,7 +17,8 @@ class MailController extends Controller
             "time" => $time
         ];
 
-        Mail::to('pikkypad@gmail.com')->send(new AllertMail($content));
+        // Mail::to($user)->send(new AllertMail($content));
+        Mail::to($user)->send(new AllertMail($content));
     }
     public function sendWelcomeMail($email, $name)
     {
