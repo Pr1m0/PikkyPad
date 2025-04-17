@@ -11,6 +11,7 @@ import { AdminUserComponent } from './admin/admin-user/admin-user.component';
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
 import { AdminGameComponent } from './admin/admin-game/admin-game.component';
 import { AdminChildrenComponent } from './admin/admin-children/admin-children.component';
+import { PuzzleGameComponent } from './games/puzzle-game/puzzle-game.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },  
@@ -20,6 +21,7 @@ export const routes: Routes = [
   {path: 'child/:childId/games', component:ChildGamesComponent,canActivate: [AuthGuard] },
   { path: 'child-games', component: ChildGamesComponent,canActivate: [AuthGuard]  },
   { path: 'child-play', component: ChildPlayComponent,canActivate: [AuthGuard]  },
+  { path: 'puzzle-game', component:PuzzleGameComponent,canActivate:[AuthGuard]  },
   
   
   {

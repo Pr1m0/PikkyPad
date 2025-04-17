@@ -1,14 +1,16 @@
-<div class="puzzle-game">
-    <h2>Rakd össze a puzzle-t!</h2>
-    
-    <div class="puzzle-container">
-      <div *ngFor='let piece of puzzlePieces' 
-           [style.backgroundImage]="'url(' + imageUrl + ')'"
-           [style.backgroundPosition]="piece.position"
-           (mousedown)="startDrag($event, piece)">
-      </div>
-    </div>
-    
-    <button (click)="shufflePieces()">Keverés</button>
-  </div>
+<div class="puzzle-container">
+  <h2>Puzzle Játék</h2>
   
+  <div class="puzzle-board" 
+       [style.width.px]="cols * pieceSize"
+       [style.height.px]="rows * pieceSize">
+       
+    <div *ngFor="let piece of pieces"
+         class="puzzle-piece"
+         [ngStyle]="getPieceStyle(piece)"
+         (click)="movePiece(piece)">
+    </div>
+  </div>
+
+  <button (click)="createPuzzle()">Új játék</button>
+</div>
