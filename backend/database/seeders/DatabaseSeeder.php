@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\GameSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,5 +35,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('superadmin123'),
             'role' => 'superadmin',
         ]);
+
+        $this->call(GameSeeder::class);
     }
 }
