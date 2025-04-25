@@ -43,7 +43,7 @@ A Pikkypad egy webalapú alkalmazás, amelynek célja az óvodáskorú gyermekek
 - composer install
 - .env beállítása
 - php artisan migrate
-- php artisan db:seed /Adminisztrátori jogok létrehozása és Test user
+- php artisan db:seed /Adminisztrátorok létrehozása, Test user és játékok aktiválása
 - php artisan serve
 
 **2. Angular oldalon:**
