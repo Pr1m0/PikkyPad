@@ -1,88 +1,86 @@
 .win-message {
-    font-size: 24px;
-    color: rgb(38, 27, 187);
-    margin-top: 0px;
-    margin-bottom: 20px;
-  }
-  .game-container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    margin-bottom: 30px;
-    background-color: #303cdd;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(10, 10, 10, 0.1);
-  }
-  
-  button:hover {
-    background-color: #45a049;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-  
+  font-size: 24px;
+  color: rgb(38, 27, 187);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.game-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  background-color: #303cdd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(10, 10, 10, 0.1);
+}
+
+button:hover {
+  background-color: #3d5afe;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.card {
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+}
+
+.card img,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease;
+}
+
+.card-back {
+  background-color: #f0f0f0;
+  transform: rotateY(0deg);
+  user-select: none;
+  cursor: pointer;
+}
+
+.card.flipped img {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .card-back {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 768px) {
   .game-board {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    gap: 10px;
-    padding: 10px;
-    box-sizing: border-box;
+    grid-template-columns: repeat(2, 1fr); /* kisebb kijelzőn 2 oszlop */
   }
-  
+
   .card {
-    width: 150px;
-    height: 150px;
-    margin: 10px;
-    perspective: 1000px;
-    cursor: pointer;
-    position: relative;
+    width: 120px;
+    height: 120px;
   }
-  
-  .card img, .card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease;
+
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
   }
-  
-  .card-back {
-    background-color: #f0f0f0;
-    transform: rotateY(0deg);
-    /* background-image: url("/img/kerdojel.jpg"); */
-  } 
-  
-  .card.flipped img {
-    transform: rotateY(180deg);
-  }
-  
-  .card.flipped .card-back {
-    transform: rotateY(180deg);
-  }
-  
-  @media (max-width: 768px) {
-    .game-board {
-      width: 100%;
-    }
-  
-    .card {
-      width: 100px;
-      height: 100px;
-    }
-  
-    button {
-      font-size: 16px;
-      padding: 8px 16px;
-    }
-  }
-  
+}

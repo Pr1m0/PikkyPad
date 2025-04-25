@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users" [class.inactive]="!user.is_active">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
@@ -19,6 +19,19 @@
           <td>
             <button class="btn btn-sm btn-outline-primary" (click)="promoteUser(user.id)">Adminná léptetés</button>
             <!-- <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user.id)">Törlés</button> -->
+            <button
+            *ngIf="user.role !== 'admin' && user.role !== 'superadmin' && user.is_active"
+            class="btn btn-sm btn-outline-danger"
+            (click)="deactivateUser(user.id)">
+            Inaktiválás
+            </button>
+
+            <button
+              *ngIf="!user.is_active"
+              class="btn btn-sm btn-outline-success"
+              (click)="activateUser(user.id)">
+              Aktiválás
+            </button>
           </td>
         </tr>
       </tbody>

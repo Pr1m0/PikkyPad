@@ -15,8 +15,19 @@ export class AdminService {
     });
   }
 
-  deleteUser(id: number) {
-    return this.http.delete(`${this.apiUrl}/users/${id}`, {
+  // deleteUser(id: number) {
+  //   return this.http.delete(`${this.apiUrl}/users/${id}`, {
+  //     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  //   });
+  // }
+  deactivateUser(id: number) {
+    return this.http.patch(`${this.apiUrl}/admin/users/${id}/deactivate`, {}, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+  }
+
+  activateUser(id: number) {
+    return this.http.patch(`${this.apiUrl}/admin/users/${id}/activate`, {}, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     });
   }

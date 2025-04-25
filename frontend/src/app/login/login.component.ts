@@ -53,12 +53,14 @@ export class LoginComponent {
         error: (err) => {
           console.error('Bejelentkezési hiba:', err);
   
-          if (err.status === 401 && err.error?.errorMessage) {
-            this.toastr.error(err.error.errorMessage);
+          if (err.status === 403 && err.error?.errorMessage) {
+            this.toastr.warning(err.error.errorMessage); 
+          } else if (err.status === 401 && err.error?.errorMessage) {
+            this.toastr.error(err.error.errorMessage); 
           } else if (err.status === 422 && err.error?.error) {
             this.toastr.warning('Hibás adatbevitel! Kérlek, ellenőrizd az űrlapot.');
           } else {
-            this.toastr.error('Hibás email vagy jelszó!');
+            this.toastr.error('Bejelentkezési hiba történt.');
           }
         }
       });

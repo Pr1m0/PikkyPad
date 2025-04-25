@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { GameService } from '../../services/game.service'; 
 
 @Component({
   selector: 'app-memory-game',
@@ -13,33 +14,48 @@ export class MemoryGameComponent implements OnInit {
   cards: { url: string, matched: boolean, flipped: boolean }[] = [];
   flippedCards: { index: number, url: string }[] = [];
   allMatched: boolean = false;
+  memoryImages: string[] = [];
 
   private route = inject(ActivatedRoute);
+  private gameService = inject(GameService); 
   gameId!: number;
 
   ngOnInit(): void {
-   
     this.route.queryParams.subscribe(params => {
       this.gameId = +params['gameId'];
       console.log('Kapott gameId:', this.gameId);
     });
 
-   
-    this.initializeCards();
+    this.loadImages();
+  }
+
+  loadImages(): void {
+    this.gameService.getMemoryImages().subscribe({
+      next: (res) => {
+        this.memoryImages = res.data;
+        this.initializeCards();
+      },
+      error: (err) => {
+        console.error('Nem sikerült betölteni a memória képeket:', err);
+      }
+    });
   }
 
   initializeCards(): void {
-    const imageUrls = [
-      'img/elephant.jpg',
-      'img/lion.jpg',
-      'img/fox.jpg'
-    ];
-
-    const duplicatedUrls = [...imageUrls, ...imageUrls];
-
+    if (this.memoryImages.length === 0) {
+      console.warn('Nincsenek memória játék képek');
+      return;
+    }
+  
+    const shuffledImages = [...this.memoryImages].sort(() => Math.random() - 0.5);
+  
+    const selectedImages = shuffledImages.slice(0, 3);
+  
+    const duplicatedUrls = [...selectedImages, ...selectedImages];
+  
     this.cards = duplicatedUrls
       .map(url => ({ url, matched: false, flipped: false }))
-      .sort(() => Math.random() - 0.5);
+      .sort(() => Math.random() - 0.5); 
   }
 
   flipCard(index: number): void {
@@ -59,7 +75,6 @@ export class MemoryGameComponent implements OnInit {
     if (card1.url === card2.url) {
       this.cards[card1.index].matched = true;
       this.cards[card2.index].matched = true;
-
       this.checkForWin();
     } else {
       setTimeout(() => {

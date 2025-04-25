@@ -55,6 +55,41 @@ export class AdminUserComponent implements OnInit {
   //     });
   //   }
   // }
+  deactivateUser(id: number) {
+    if (confirm('Biztos inaktiválni szeretnéd ezt a felhasználót?')) {
+      this.adminService.deactivateUser(id).subscribe({
+        next: (res: any) => {
+          if (res.success) {
+            this.toastr.success(res.message);
+            this.loadUsers();
+          } else {
+            this.toastr.error(res.message);
+          }
+        },
+        error: () => {
+          this.toastr.error('Hiba történt az inaktiválás során!');
+        }
+      });
+    }
+  }
+
+  activateUser(id: number) {
+    if (confirm('Biztosan újraaktiválod ezt a felhasználót?')) {
+      this.adminService.activateUser(id).subscribe({
+        next: (res: any) => {
+          if (res.success) {
+            this.toastr.success(res.message);
+            this.loadUsers();
+          } else {
+            this.toastr.error(res.message);
+          }
+        },
+        error: () => {
+          this.toastr.error('Hiba történt az aktiválás során!');
+        }
+      });
+    }
+  }
 
   promoteUser(id: number) {
     if (confirm('Biztos adminná akarod léptetni ezt a felhasználót?')) {

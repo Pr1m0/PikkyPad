@@ -9,10 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./puzzle-game.component.css']
 })
 export class PuzzleGameComponent {
-  // Játékállapot
   images: string[] = [
-    '../../img/mozodny.jpg',
-    '../../img/lionpuzzle.jpg'
+    'http://localhost:8000/img/games/puzzle/lionpuzzle.jpg',
     
   ];
   currentImageIndex: number = 0;

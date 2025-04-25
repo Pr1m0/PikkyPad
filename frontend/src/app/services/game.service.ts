@@ -74,4 +74,15 @@ export class GameService {
     });
   }
   
+  getMemoryImages() {
+    return this.http.get<{ success: boolean, data: string[] }>(
+      `${this.apiUrl}/games/memory-images`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    );
+  }
+  
 }
