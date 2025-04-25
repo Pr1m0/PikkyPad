@@ -14,9 +14,26 @@ class Game extends Model
         'category'
     ];
 
+    protected $appends = ['image_url','puzzle_image_url'];
+
+
+
     public function children()
     {
     return $this->belongsToMany(Child::class, 'child_game');
     }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image
+            ? asset('storage/img/games/' . $this->image)
+            : null;
+    }
+
+    public function getPuzzleImageUrlAttribute()
+    {
+    return asset('/img/games/puzzle/lionpuzzle.jpg');
+    }
+
 
 }

@@ -14,8 +14,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function () {
 
     Route::get('/users', [AdminController::class, 'index']);
-    Route::delete('/users/{id}', [AdminController::class, 'destroy']);
+    // Route::delete('/users/{id}', [AdminController::class, 'destroy']);
     Route::post('/users/{id}/promote-admin', [AdminController::class, 'promoteToAdmin']);
+    Route::patch('/admin/users/{id}/deactivate', [AdminController::class, 'deactivateUser']);
+    Route::patch('/admin/users/{id}/activate', [AdminController::class, 'activateUser']);
+
+
 
     Route::get('/admin/children', [AdminController::class, 'listChildren']);
     Route::delete('/admin/children/{id}', [AdminController::class, 'deleteChild']);
@@ -41,6 +45,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/statistics', [StatisticsControler::class, 'save_statistics']);
     Route::get('/user/statistics', [StatisticsControler::class, 'userStatistics']);
     Route::get('/parent/statistics', [StatisticsControler::class, 'parentStatistics']);
+
+    Route::get('/games/memory-images', [GameController::class, 'getMemoryImages']);
+
+
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

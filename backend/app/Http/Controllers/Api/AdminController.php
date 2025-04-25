@@ -22,10 +22,29 @@ class AdminController extends Controller
     /**
      * Egy adott felhasználó törlése admin által.
      */
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //     $user = User::find($id);
+
+    //     if (!$user) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Felhasználó nem található.'
+    //         ], 404);
+    //     }
+
+    //     $user->delete();
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Felhasználó sikeresen törölve.'
+    //     ], 200);
+    // }
+
+    public function deactivateUser($id)
     {
         $user = User::find($id);
-
+    
         if (!$user) {
             return response()->json([
                 'success' => false,
@@ -33,14 +52,40 @@ class AdminController extends Controller
             ], 404);
         }
 
-        $user->delete();
-
+        if (in_array($user->role, ['admin', 'superadmin'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Admin vagy Superadmin nem inaktiválható.'
+            ], 403);
+        }
+    
+        $user->is_active = false;
+        $user->save();
+    
         return response()->json([
             'success' => true,
-            'message' => 'Felhasználó sikeresen törölve.'
-        ], 200);
+            'message' => 'Felhasználó inaktiválva.'
+        ]);
     }
-
+    public function activateUser($id)
+    {
+        $user = User::find($id);
+    
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Felhasználó nem található.'
+            ], 404);
+        }
+    
+        $user->is_active = true;
+        $user->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Felhasználó újraaktiválva.'
+        ]);
+    }
     /**
      * Egy felhasználó adminná tétele.
      */
@@ -76,7 +121,7 @@ class AdminController extends Controller
      */
     public function listChildren()
     {
-        $children = Child::with('user')->get(); // Gyermekek és szüleik lekérdezése
+        $children = Child::with('user')->get(); 
         return response()->json([
             'success' => true,
             'data' => $children,

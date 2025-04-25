@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class GameController extends Controller
 {
@@ -81,5 +83,21 @@ class GameController extends Controller
             'message' => 'Játék törölve.'
         ], 200);
     }
+
+    public function getMemoryImages()
+    {
+    $files = File::files(public_path('/img/games/memory'));
+
+    $images = array_map(function ($file) {
+        return asset('/img/games/memory/' . $file->getFilename());
+    }, $files);
+
+    return response()->json([
+        'success' => true,
+        'data' => $images,
+    ]);
+    }
+
+    
     
 }

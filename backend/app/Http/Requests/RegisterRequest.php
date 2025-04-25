@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
                 'regex:/[a-z]/',    
                 'regex:/[A-Z]/',    
                 'regex:/[0-9]/',    
-                'regex:/[@$!%*?&]/' 
+                'regex:/[@$!%*?&.]/' 
             ],
             'confirm_password' => 'same:password|required'
         ];

@@ -42,6 +42,9 @@ class AuthController extends ResponseController {
     
         if (Auth::attempt(["email" => $request["email"], "password" => $request["password"]])) {
             $user = Auth::user();
+            if (!$user->is_active) {
+                return $this->sendError("Azonosítási hiba", "A fiókod fel lett függeszteve. Kérjük, vedd fel a kapcsolatot az adminisztrátorral.", 403);
+            }
     
             $banningTime = (new BannerController)->getBanningTime($user->email);
     
