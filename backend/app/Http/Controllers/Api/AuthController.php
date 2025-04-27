@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\ResponseController;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +10,8 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Http\Controllers\MailController;
+use Illuminate\Support\Facades\Log;
+
 
 
 class AuthController extends ResponseController {
@@ -30,7 +31,7 @@ class AuthController extends ResponseController {
             app(\App\Http\Controllers\MailController::class)
                 ->sendWelcomeMail($user->email, $user->name);
         } catch (\Throwable $e) {
-            \Log::error('Sikertelen welcome email küldés: ' . $e->getMessage());
+            Log::error('Sikertelen welcome email küldés: ' . $e->getMessage());
         }
 
 

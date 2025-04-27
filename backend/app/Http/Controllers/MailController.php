@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\MailController;
 use App\Mail\AllertMail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;

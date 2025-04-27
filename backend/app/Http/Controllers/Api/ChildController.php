@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Child;  
+use App\Models\Child;
+
 
 class ChildController extends Controller
 {
@@ -55,7 +56,7 @@ class ChildController extends Controller
     {
         $request->validate([
             'name' => 'sometimes|required|string',
-            'age' => 'sometimes|required|integer|min:3|max:9'
+            'age' => 'sometimes|required|integer|min:3|max:5'
         ]);
 
         $user = auth()->user();
